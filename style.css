@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Great+Vibes&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+  --burgundy: #5A0F12;
+  --deep-burgundy: #3A0B0E;
+  --black: #0B0B0C;
+  --charcoal: #1C1C1E;
+  --gold: #C2A878;
+  --white: #FFFFFF;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:var(--black);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.hero{
+  background:linear-gradient(to bottom,var(--charcoal),var(--black));
+  padding:100px 20px;
+  text-align:center;
+  border-bottom:2px solid var(--gold);
+}
+
+.title{
+  font-family:'Playfair Display',serif;
+  font-size:46px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.accent{
+  font-family:'Great Vibes',cursive;
+  font-size:34px;
+  color:var(--gold);
+  margin-top:10px;
+}
+
+.panel{
+  flex:1;
+  text-align:center;
+  padding:40px 20px;
+  background:var(--burgundy);
+  border-top:1px solid var(--gold);
+}
+
+.subtitle{
+  max-width:600px;
+  margin:0 auto 30px;
+  font-size:17px;
+  line-height:1.5;
+}
+
+.footer{
+  background:var(--deep-burgundy);
+  color:var(--gold);
+  text-align:center;
+  padding:15px;
+  font-size:14px;
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Levi — Sign In</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Load our app JS -->
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+<section class="hero">
+  <h1 class="title">Generate Certificates</h1>
+  <p class="accent">with Levi</p>
+</section>
+
+<section class="panel">
+  <p class="subtitle">
+    Sign in with your Google account to continue.
+  </p>
+
+ 
+  <div id="g_id_onload"
+       data-client_id="529358320442-q2hqqmi7nj8ksm220bjhm888bn506557.apps.googleusercontent.com"
+       data-context="signin"
+       data-ux_mode="popup"
+       data-callback="handleGoogleLogin"
+       data-auto_prompt="false">
+  </div>
+
+  
+  <div class="g_id_signin"
+       data-type="standard"
+       data-size="large"
+       data-theme="outline"
+       data-text="signin_with"
+       data-shape="rectangular"
+       data-logo_alignment="left">
+  </div>
+</section>
+
+<div class="footer">© Levi — Certificate Generator</div>
+
+</body>
+</html>
