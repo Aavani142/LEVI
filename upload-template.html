@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Upload Template</title>
   <link rel="stylesheet" href="style.css">
+  <script src="api.js" defer></script>
 </head>
 <body>
 
@@ -14,17 +15,8 @@
 
 <section class="panel">
   <p class="subtitle">Choose your certificate template (PPTX / Slides)</p>
-  <input type="file" accept=".pptx" style="
-    background:transparent;
-    border:1px solid var(--gold);
-    color:white;
-    padding:12px;
-    border-radius:4px;
-    width:70%;
-    margin-bottom:20px;
-  ">
-  <br>
-  <button onclick="alert('Continue logic here')" style="
+   <input id="slideLink" class="linkInput" placeholder="Paste google Slides link">
+  <button onclick="handleTemplateNext()" style="
     background:var(--gold);
     color:black;
     border:none;

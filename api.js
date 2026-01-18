@@ -1,25 +1,40 @@
 // ===== CONFIG =====
-const APPS_SCRIPT_URL = "PASTE_YOUR_WEB_APP_URL_HERE";
-
-// ===== PAGE 1: UPLOAD TEMPLATE =====
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwz5SD4xUTyUtPSf6stFdVCh3w2fTYHmstNSC2o3pjdKVzf34PhRWbYSwnu09dMdcdiOA/exec"
 function handleTemplateNext() {
-  const fileInput = document.querySelector('input[type="file"]');
-  const templateFile = fileInput.files[0];
+  const linkInput = document.getElementById("slideLink");
+  const slideLink = linkInput.value.trim();
 
-  if (!templateFile) {
-    alert("Please upload a certificate template");
+  if (!slideLink) {
+    alert("Please paste the Google Slides template link");
     return;
   }
 
-  // Store file temporarily in memory (not upload yet)
-  sessionStorage.setItem("templateFileName", templateFile.name);
+  // Basic validation (must be a Google Slides link)
+  if (!slideLink.includes("docs.google.com/presentation")) {
+    alert("Please enter a valid Google Slides link");
+    return;
+  }
 
-  // Store file in a global variable (needed for same session)
-  window.selectedTemplateFile = templateFile;
+  // Store link for later steps
+  sessionStorage.setItem("templateSlideLink", slideLink);
 
-  // Move to next page
+  console.log("Template link saved:", slideLink);
+
+  // Go to next page
   window.location.href = "select-sheet.html";
 }
+
+
+function extractSheetId(url) {
+  const match = url.match(/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
+}
+
+function extractSlideId(url) {
+  const match = url.match(/presentation\/d\/([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
+}
+
 function goToGenerate() {
   const sheetLink = document.getElementById("sheetLink").value.trim();
 
@@ -34,17 +49,29 @@ function goToGenerate() {
     return;
   }
 
-  if (!window.selectedTemplateFile) {
-    alert("Template file missing. Go back and upload again.");
+  const slideLink = sessionStorage.getItem("templateSlideLink");
+  if (!slideLink) {
+    alert("Template link missing. Go back and paste the Slides link again.");
     return;
   }
-function extractSheetId(link) {
-  const match = link.match(/\/d\/([a-zA-Z0-9-_]+)/);
-  return match ? match[1] : null;
+
+  const slideId = extractSlideId(slideLink);
+
+  generateCertificates(sheetId, slideId);
+}
+function generateCertificates(sheetId, slideId) {
+  const url = `${APPS_SCRIPT_URL}?sheetId=${sheetId}&slideId=${slideId}`;
+
+  fetch(url, { mode: "no-cors" })
+    .then(() => {
+      alert("Certificate generation started successfully!");
+    })
+    .catch(() => {
+      alert("Request sent, but browser blocked the response.");
+    });
 }
 
-  generateCertificates(sheetId);
-}
+
 // Called automatically after Google sign-in
 function handleGoogleLogin(response) {
   const idToken = response.credential;
